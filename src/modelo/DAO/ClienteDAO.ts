@@ -88,6 +88,12 @@ export class ClienteDAO {
     }
   }
 
+  public async buscarClientes(): Promise<any[]> {
+        const sql = `SELECT * FROM cliente`;
+        const result = await db.query(sql);
+        return result.rows;
+  }
+
      
 }
 

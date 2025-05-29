@@ -1,0 +1,1 @@
+export type Status = 'Em análise' | 'Finalizado'| 'Cancelado'| 'Aguardando pagamento'| 'Aguardando confirmação'| 'Consertando';

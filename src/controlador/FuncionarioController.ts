@@ -5,7 +5,7 @@ import {Funcionario} from '../modelo/dominio/funcionario';
 import {UsuarioBO} from '../modelo/BO/UsuarioBO';
 
 class FuncionarioController {
-  async cadastrar(req: Request, res: Response) {
+  public async cadastrar(req: Request, res: Response) {
     try {
       const {
         nome,
