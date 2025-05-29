@@ -1,20 +1,21 @@
 // servico.ts
 import { Cliente } from './cliente';
 import { Orcamento } from './orcamento';
+import {Status} from '../../types/Status'
 
 export class Servico {
   private _id: number;
   private _cliente: Cliente | null; // Agora é um objeto Cliente ou null
   private _orcamento: Orcamento | null; // Agora é um objeto Orcamento ou null
   private _descricao: string;
-  private _status: 'pendente' | 'concluido';
+  private _status: Status;
   private _data_inicio: Date;
   private _data_fim: Date | null;
 
-  constructor(id: number, descricao: string, cliente?: Cliente, orcamento?: Orcamento) {
+  constructor(id: number, descricao: string,  status:Status ,cliente?: Cliente, orcamento?: Orcamento) {
     this._id = id;
     this._descricao = descricao;
-    this._status = 'pendente';
+    this._status = status;
     this._data_inicio = new Date();
     this._data_fim = null;
     this._cliente = cliente || null;
@@ -58,7 +59,7 @@ export class Servico {
     return this._status;
   }
 
-  set status(status: 'pendente' | 'concluido') {
+  set status(status: Status) {
     this._status = status;
   }
 

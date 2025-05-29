@@ -4,7 +4,7 @@ import { UsuarioBO } from '../modelo/BO/UsuarioBO';
 export class UsuarioController {
   private usuarioBO = new UsuarioBO();
 
-  async login(req: Request, res: Response) {
+  public async login(req: Request, res: Response) {
     const { login, senha } = req.body;
 
     if (!login || !senha) {

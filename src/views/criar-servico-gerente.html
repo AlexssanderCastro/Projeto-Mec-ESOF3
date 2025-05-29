@@ -5,8 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/criar-servico.css">
     <script src="/js/gerente.js"></script>
-
+    <script src="/js/listar-clientes.js"></script>
+    <script src="js/filtroCliente.js"></script>
+    
     <title>Home</title>
 </head>
 
@@ -30,7 +33,7 @@
                 <li>
                     <select class="servG">
                         <option class="opcao-select" value="" selected disabled>Serviços</option>
-                        <option class="opcao-select" value="/criar-servico-gerente.html">Criar</option>
+                        <option class="opcao-select" value="">Criar</option>
                         <option class="opcao-select" value="">Gerenciar</option>
                     </select>
                 </li>
@@ -64,40 +67,40 @@
         </div>
     </header>
 
-    <div class="container">
-        <div class="overlay">
-            <div class="slogan-left">
-                <h1 class="slogan-titulo">Venha nos conhecer!!</h1>
 
-                <p class="texto-slogan">
-                    Venha para a Master Car Auto Peças e Mecânica
-                    porque seu carro merece o melhor cuidado, qualidade,
-                    confiança e precisão em cada serviço!
-                </p>
-            </div>
-        </div>
-        <img class="slogan-img" src="../img/imagem-fundo-slogan.jpg" alt="Fundo">
+    <div class="container">
+        <h2>Criar Serviço</h2>
+        <form id="form-servico">
+            <label for="busca-cliente">Buscar Cliente:</label>
+            <input type="text" id="busca-cliente" placeholder="Digite o nome do cliente...">
+
+            <label for="cliente">Cliente:</label>
+            <select id="cliente" required></select>
+
+            <label for="descricao">Descrição:</label>
+            <textarea id="descricao" required placeholder="Descreva o problema do veículo"></textarea>
+
+            <button type="submit">Criar Serviço</button>
+        </form>
+        <div id="mensagem"></div>
     </div>
 
     <footer>
         <div class="logo-footer">
             <a href="index.html"><img src="../img/logo-fundo-branco-MCAM.png" class="logo-fundo-branco"></a>
         </div>
-        <div class="opcoes-footer-pai">
-            <ul class="opcoes-footer">
-                <a href=#topHeader class="link-limpo">
-                    <li class="home-footer">Home</li>
-                </a>
-                <li>
-                    <select class="sef">
-                        <option class="opcao-select-footer" value="" selected disabled>Serviços</option>
-
-                        <option class="opcao-select-footer" value="">Criar</option>
-                        <option class="opcao-select-footer" value="">Gerenciar</option>
-                    </select>
-                </li>
-            </ul>
-        </div>
+        <ul class="opcoes-footer">
+            <a href=#topHeader class="link-limpo">
+                <li class="home-footer">Home</li>
+            </a>
+            <li>
+                <select class="servG">
+                    <option class="opcao-select" value="" selected disabled>Serviços</option>
+                    <option class="opcao-select" value="/criar-servico-gerente.html">Criar</option>
+                    <option class="opcao-select" value="">Gerenciar</option>
+                </select>
+            </li>
+        </ul>
 
         <div class="contatos" id="Contatos">
             <div class="contatos-filho">
@@ -121,6 +124,9 @@
             </div>
         </div>
     </footer>
+
+
+    <script src="js/criar-servico.js"></script>
 </body>
 
 </html>

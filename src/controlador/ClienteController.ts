@@ -106,5 +106,21 @@ export class ClienteController {
       res.status(500).json({ erro: 'Erro interno no servidor.' });
     }
   }
-  
+
+  public async buscarClientes(req: Request, res: Response): Promise<void> {
+    try {
+      const clientes = await this.clienteBO.buscarClientes();
+
+      const clientesSimples = clientes.map(c => ({
+        id: c.id,
+        nome: c.nome,
+        cpf: c.cpf,
+      }));
+
+      res.status(200).json(clientesSimples);
+    } catch (error) {
+      res.status(500).json({ erro: 'Erro ao buscar clientes' });
+    }
+  }
+
 }

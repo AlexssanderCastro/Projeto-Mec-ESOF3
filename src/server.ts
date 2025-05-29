@@ -5,6 +5,7 @@ import cliente from './routes/cliente.routes';
 import usuario from './routes/usuario.routes';
 import gerente from './routes/gerente.routes';
 import funcionario from './routes/funcionario.routes';
+import servico from './routes/servico.routes';
 import session from 'express-session';
 
 const app = express();
@@ -36,6 +37,7 @@ app.use(cliente);
 
 app.use(gerente);
 app.use(funcionario);
+app.use(servico);
 
 // Iniciando o servidor
 app.listen(PORT, () => {
