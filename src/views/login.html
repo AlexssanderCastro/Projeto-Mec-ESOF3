@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="/css/login.css">
+    
+    <title>Home</title>
+</head>
+
+
+<body>
+    <header>
+        <div class="top-header" id="topHeader">
+            <div class="div-logo"> 
+                <ul class="home-logo" >
+                    <li>
+                        <a href="/"><img src="../img/logo-MCAM.png" class="logo"></a>
+                    </li>
+                    <li>
+                        <a href="/" class="link-limpo">Home</a>
+                    </li>
+                </ul>
+                
+            </div>
+            
+            <ul class="opcoes">
+                <li>
+                    <select class="serv">
+                        <option class ="opcao-select" value="" selected disabled>Serviços</option>
+                        <option class ="opcao-select" value="/login.html">Acompanhar Serviço</option>
+                        <option class ="opcao-select" value="/login.html">Histórico de Serviços</option>
+                    </select>
+                </li>
+                
+                <li>
+                    <a href="#Contatos" class="link-limpo">Contato</a>
+                </li>
+                
+            </ul>
+            <ul class = "login">
+                <li class="l-l-icon">
+                    <a href="\login.html" ><img class="login-icon" src="../img/icone-login.png"></a>
+                </li>
+                <li class="l-l-txt">
+                    <a href="login.html" class="link-limpo"><b>Entre</b></a> ou
+                    <a href="cadastro-cliente.html" class="link-limpo"><b>Cadastre-se</b></a>
+                </li>
+            </ul>
+
+            
+            
+        </div>
+
+        <div class="bot-header">
+            
+            <a href="https://www.instagram.com/mastercarautopecasemecanica/" target="_blank"><img src="../img/icone-insta-preto.png" class="icone-insta-p"></a>   
+        </div>
+    </header>
+    
+    
+
+    <main class="login-container">
+        <section class="login-box">
+          <h1>Login</h1>
+          <form method="POST" action="/login">
+            <label for="login">Usuário ou Email:</label>
+            <input type="text" id="login" name="login" required />
+    
+            <label for="senha">Senha:</label>
+            <input type="password" id="senha" name="senha" required />
+    
+            <button type="submit">Entrar</button>
+          </form>
+          <p>Não tem conta? <a href="cadastro-cliente.html">Cadastre-se aqui</a></p>
+        </section>
+      </main>
+
+
+
+
+
+    <footer>
+        <div class="logo-footer">
+            <a href="index.html"><img src="../img/logo-fundo-branco-MCAM.png" class="logo-fundo-branco"></a> 
+        </div>
+        <div class="opcoes-footer-pai">
+            <ul class="opcoes-footer">
+                <a href="/" class="link-limpo"><li class="home-footer">Home</li></a>
+                <li>
+                    <select class="sef">
+                        <option class ="opcao-select-footer" value="" selected disabled>Serviços</option>
+                        <option class ="opcao-select-footer" value="">Agendamento</option>
+                        <option class ="opcao-select-footer" value="">Acompanhar serviço</option>
+                    </select>
+                </li>
+                
+                
+                
+            </ul>
+        </div>
+        
+        <div class="contatos" id="Contatos">
+            <div class="contatos-filho">
+                <h1>Contatos:</h1>
+                <br>
+                
+                
+                <ul class="contatos-footer">
+                    <li class="ctt">
+                        <img src="../img/tel-icone.png" class="icon-ctt-tel">
+                        <p>Ligue<br><b>(34) 3469-1956</b></p>
+                    </li>
+                    
+                    <li class="ctt">
+                        <img src="../img/icone-whatsapp.png" class="icon-ctt-zap">
+                        <p><b>(34)9 9815-1225</b><br>
+                        <b>(34)9 8830-5045</b></p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </footer> 
+</body>
+
+</html>

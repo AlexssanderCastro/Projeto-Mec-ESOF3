@@ -1,0 +1,1 @@
+export type PerfilUsuario = 'cliente' | 'funcionario' | 'gerente';
