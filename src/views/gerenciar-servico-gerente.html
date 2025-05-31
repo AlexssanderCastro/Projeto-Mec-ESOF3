@@ -5,11 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/index.css">
-    <link rel="stylesheet" href="../css/criar-servico.css">
+    <link rel="stylesheet" href="../css/gerenciar-servico.css">
     <script src="/js/gerente.js"></script>
-    <script src="/js/listar-clientes.js"></script>
-    <script src="js/filtroCliente.js"></script>
-    
+
     <title>Home</title>
 </head>
 
@@ -67,27 +65,24 @@
         </div>
     </header>
 
-
     <div class="container">
-        <h2>Criar Serviço</h2>
-        <form id="form-servico">
-            <label for="busca-cliente">Buscar Cliente:</label>
-            <input type="text" id="busca-cliente" placeholder="Digite o nome do cliente...">
+        <h2 class="titulo">Gerenciar Serviço</h2>
 
-            <label for="cliente">Cliente:</label>
-            <select id="cliente" required></select>
+        <div class="secao-superior">
+            <div id="dados-servico" class="secao"></div>
+            <div id="dados-cliente" class="secao"></div>
+        </div>
 
-            <label for="descricao">Descrição:</label>
-            <textarea id="descricao" required placeholder="Descreva o problema do veículo"></textarea>
-
-            <button type="submit">Criar Serviço</button>
-        </form>
-        <div id="mensagem"></div>
+        <div id="dados-orcamento" class="secao"></div>
+        <div id="itens-orcamento" class="secao"></div>
+        <div id="acoes-status" class="secao"></div>
     </div>
+
+
 
     <footer>
         <div class="logo-footer">
-            <a href="index.html"><img src="../img/logo-fundo-branco-MCAM.png" class="logo-fundo-branco"></a>
+            <a href="/gerente.html"><img src="../img/logo-fundo-branco-MCAM.png" class="logo-fundo-branco"></a>
         </div>
         <ul class="opcoes-footer">
             <a href=#topHeader class="link-limpo">
@@ -97,7 +92,7 @@
                 <select class="servG">
                     <option class="opcao-select" value="" selected disabled>Serviços</option>
                     <option class="opcao-select" value="/criar-servico-gerente.html">Criar</option>
-                    <option class="opcao-select" value="">Gerenciar</option>
+                    <option class="opcao-select" value="/gerenciar-servicos-gerente.html">Gerenciar</option>
                 </select>
             </li>
         </ul>
@@ -125,8 +120,9 @@
         </div>
     </footer>
 
+    <script src="/js/gerenciar-servico.js"></script>
 
-    <script src="js/criar-servico.js"></script>
+
 </body>
 
 </html>
