@@ -12,11 +12,11 @@ export class Servico {
   private _data_inicio: Date;
   private _data_fim: Date | null;
 
-  constructor(id: number, descricao: string,  status:Status ,cliente?: Cliente, orcamento?: Orcamento) {
+  constructor(id: number, descricao: string,  status:Status ,cliente?: Cliente, orcamento?: Orcamento | null,_data_inicio?: Date) {
     this._id = id;
     this._descricao = descricao;
     this._status = status;
-    this._data_inicio = new Date();
+    this._data_inicio = _data_inicio || new Date();
     this._data_fim = null;
     this._cliente = cliente || null;
     this._orcamento = orcamento || null;

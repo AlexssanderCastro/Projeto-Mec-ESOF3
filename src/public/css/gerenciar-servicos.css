@@ -1,0 +1,108 @@
+.container {
+  max-width: 90%;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 16px;
+}
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.card-servico {
+  border: 2px solid #444; /* borda mais escura */
+  border-radius: 16px;
+  padding: 20px;
+  width: 100%;
+  max-width: 380px;
+  cursor: pointer;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.card-servico:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  background-color: #f5f9ff;
+}
+
+.titulo-listagem-servicos {
+  text-align: center;
+  padding-bottom: 6vh;
+}
+
+/* Estilo para blocos com título acima */
+.card-servico .titulo-campo {
+  text-align: center;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.card-servico .valor-campo {
+  text-align: center;
+  color: #555;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+/* Estilo para status (seguindo o mesmo padrão) */
+.card-servico .status-campo {
+  text-align: center;
+  font-weight: bold;
+  color: #333;
+  margin-top: 10px;
+}
+
+.card-servico .status-valor {
+  text-align: center;
+  color: #555;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.card-servico hr {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 10px 0;
+}
+
+/* Estilo para descrição */
+.card-servico .descricao-label {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.card-servico .descricao-texto {
+  text-align: justify;
+  color: #444;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+/* Estilo para botão de gerenciar */
+.botao-gerenciar {
+  display: block;
+  margin: 15px auto 0;
+  padding: 10px 16px;
+  background-color: #005eff;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  width: fit-content;
+}
+
+.botao-gerenciar:hover {
+  background-color: #0044cc;
+}

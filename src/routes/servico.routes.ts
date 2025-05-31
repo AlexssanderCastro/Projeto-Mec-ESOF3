@@ -18,6 +18,18 @@ router.get('/criar-servico-funcionario.html', (req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, '..', 'views', 'criar-servico-funcionario.html'));
 });
 
+router.get('/gerenciar-servicos-gerente.html', (req: Request, res: Response) => {
+  res.sendFile(path.join(__dirname, '..', 'views', 'gerenciar-servicos-gerente.html'));
+});
+
+router.get('/gerenciar-servico-gerente.html', (req: Request, res: Response) => {
+  res.sendFile(path.join(__dirname, '..', 'views', 'gerenciar-servico-gerente.html'));
+});
+
 router.post('/criar-servico', (req, res) => servicoController.criar(req, res));
+
+router.get('/servicos-ativos', (req, res) => servicoController.listarAtivos(req, res));
+
+router.get('/buscar-servico/:id', (req, res) =>servicoController.buscarServicoPorId(req, res));
 
 export default router;

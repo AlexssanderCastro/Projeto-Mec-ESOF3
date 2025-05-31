@@ -1,21 +1,23 @@
 // orcamento.ts
 import { Cliente } from './cliente';
+import { ItemOrcamento } from './itens_orcamento';
 
 export class Orcamento {
   private _id: number;
-  private _cliente: Cliente; // Agora é um objeto Cliente
+  
   private _data_orcamento: Date;
   private _valor_total: number;
+  private _itens: ItemOrcamento[];
 
-  constructor(id: number, cliente: Cliente, valor_total: number) {
+  constructor(id: number, valor_total: number, itens: ItemOrcamento[], data_orcamento?: Date) {
     this._id = id;
-    this._cliente = cliente;
-    this._data_orcamento = new Date();
+    this._data_orcamento = data_orcamento ?? new Date(); // Se não vier, usa a data atual
     this._valor_total = valor_total;
+    this._itens = itens;
   }
 
-  // Getters and Setters
-  get id() {
+  // Getters e Setters
+  get id(): number {
     return this._id;
   }
 
@@ -23,15 +25,9 @@ export class Orcamento {
     this._id = id;
   }
 
-  get cliente() {
-    return this._cliente;
-  }
+  
 
-  set cliente(cliente: Cliente) {
-    this._cliente = cliente;
-  }
-
-  get data_orcamento() {
+  get data_orcamento(): Date {
     return this._data_orcamento;
   }
 
@@ -39,11 +35,20 @@ export class Orcamento {
     this._data_orcamento = data_orcamento;
   }
 
-  get valor_total() {
+  get valor_total(): number {
     return this._valor_total;
   }
 
   set valor_total(valor_total: number) {
     this._valor_total = valor_total;
   }
+
+  get itens(): ItemOrcamento[] {
+    return this._itens;
+  }
+
+  set itens(itens: ItemOrcamento[]) {
+    this._itens = itens;
+  }
 }
+

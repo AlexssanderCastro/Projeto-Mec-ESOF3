@@ -1,16 +1,13 @@
 // itens_orcamento.ts
-import { Orcamento } from './orcamento';
 
 export class ItemOrcamento {
   private _id: number;
-  private _orcamento: Orcamento; // Agora é um objeto Orcamento
   private _descricao_peca: string;
   private _valor_unitario: number;
   private _quantidade: number;
 
-  constructor(id: number, orcamento: Orcamento, descricao_peca: string, valor_unitario: number, quantidade: number) {
+  constructor(id: number,  descricao_peca: string, valor_unitario: number, quantidade: number) {
     this._id = id;
-    this._orcamento = orcamento;
     this._descricao_peca = descricao_peca;
     this._valor_unitario = valor_unitario;
     this._quantidade = quantidade;
@@ -25,13 +22,7 @@ export class ItemOrcamento {
     this._id = id;
   }
 
-  get orcamento() {
-    return this._orcamento;
-  }
-
-  set orcamento(orcamento: Orcamento) {
-    this._orcamento = orcamento;
-  }
+  
 
   get descricao_peca() {
     return this._descricao_peca;

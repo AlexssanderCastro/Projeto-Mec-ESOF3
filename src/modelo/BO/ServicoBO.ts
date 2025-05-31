@@ -17,4 +17,21 @@ export class ServicoBO {
         return servicoCriado;
     }
 
+    public async buscarAtivos(): Promise<any[]> {
+        const servicos = await this.servicoDAO.buscarAtivos();
+
+        return servicos.map(s => ({
+            id: s.id,
+            descricao: s.descricao,
+            status: s.status,
+            clienteNome: s.cliente?.nome ?? 'Desconhecido',
+        }));
+    }
+
+    public async buscarServicoPorId(id: number): Promise<Servico | null> {
+        
+        return await this.servicoDAO.buscarServicoPorId(id);
+    }
+
+
 }
