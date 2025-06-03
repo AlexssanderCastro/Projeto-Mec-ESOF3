@@ -327,14 +327,14 @@ body{
     margin-bottom: 20px;
   }
   .contatos-filho{
-    margin-left: 320px;
+    margin-left: 60vh;
   }
   .icon-ctt-zap{
-    height: 55px;
+    height: 8vh;
   
   }
   .icon-ctt-tel{
-    height: 50px;
+    height: 7vh;
     margin-left: 2px;
   }
   .contatos-footer{
@@ -342,15 +342,15 @@ body{
 
     color:black;
     list-style: none;
-    gap: 50px;
-    font-size: 30px;
+    gap: 6vh;
+    font-size: 3vh;
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
     
   }
   .ctt{
     display: flex;
-    font-size: 20px;
+    font-size: 2vh;
     font-family: Arial, Helvetica, sans-serif;
     margin-top: 10px;
   }

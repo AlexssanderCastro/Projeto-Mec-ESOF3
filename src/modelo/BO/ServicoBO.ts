@@ -33,5 +33,22 @@ export class ServicoBO {
         return await this.servicoDAO.buscarServicoPorId(id);
     }
 
+    async atualizarStatus(id: number) {
+        const servico = await this.buscarServicoPorId(id);
+        if(servico){
+            if(servico.status==='Em análise'){
+                servico.status='Aguardando confirmação';
+            }else if(servico.status==='Aguardando confirmação'){
+                servico.status='Consertando';
+            }else if(servico.status==='Aguardando pagamento'){
+                servico.status='Finalizado';
+            }else if(servico.status==='Consertando'){
+                servico.status='Aguardando pagamento';
+            }
+
+        }
+        
+        return await this.servicoDAO.atualizarStatus(servico);
+    }
 
 }

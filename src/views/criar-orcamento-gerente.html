@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/index.css">
-    <link rel="stylesheet" href="../css/gerenciar-servicos.css">
+    <link rel="stylesheet" href="../css/criar-servico.css">
+    <link rel="stylesheet" href="../css/estilo-orcamento.css">
     <script src="/js/gerente.js"></script>
 
     <title>Home</title>
@@ -53,9 +54,6 @@
 
             </ul>
 
-
-
-
         </div>
 
         <div class="bot-header">
@@ -66,12 +64,47 @@
     </header>
 
 
-    <div class="container">
-        <h1 class="titulo-listagem-servicos">Serviços em Andamento</h1>
-        <div id="cards-servicos" class="cards-container">
-            <!-- Cards dos serviços serão inseridos aqui -->
+
+    <div class="container" id="container-orcamento">
+        <h2>Criar Orçamento</h2>
+
+        <form class="formulario-item" id="formularioItem">
+            <label for="descricao">Descrição da Peça:</label>
+            <input type="text" id="descricao" placeholder="Descrição da peça">
+
+            <label for="quantidade">Quantidade:</label>
+            <input type="number" id="quantidade" min="1" value="1">
+
+            <label for="valorUnitario">Valor Unitário (R$):</label>
+            <input type="number" id="valorUnitario" min="0" step="0.01">
+
+            <button type="submit" id="adicionarItem" class="adicionar-item">Adicionar</button>
+        </form>
+
+        <div class="valor-total">
+            <label for="total">Valor Total (R$):</label>
+            <input type="text" id="total" value="0.00" readonly>
         </div>
+
+        <table id="tabelaItens">
+            <thead>
+                <tr>
+                    <th>Descrição</th>
+                    <th>Quantidade</th>
+                    <th>Valor Unitário (R$)</th>
+                    <th>Subtotal (R$)</th>
+                </tr>
+            </thead>
+            <tbody id="corpoTabelaItens">
+                <!-- Itens adicionados aparecerão aqui -->
+            </tbody>
+        </table>
+        <div class="container-submeter">
+            <button type="submit" id="submeterOrcamento" class="submeter-orcamento">Submeter Orçamento</button>
+        </div>
+
     </div>
+
 
     <footer>
         <div class="logo-footer">
@@ -114,8 +147,8 @@
         </div>
     </footer>
 
-    <script src="js/gerenciar-servicos.js"></script>
 
+    <script src="js/script-orcamento.js"></script>
 </body>
 
 </html>

@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", async () => {
     const urlParams = new URLSearchParams(window.location.search);
     const servicoId = urlParams.get("id");
-
+    
     if (!servicoId) {
         alert("ID do serviço não informado.");
         return;
@@ -13,14 +13,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         if(!servico){
             alert("Problema ao buscar serviço")
         }
-        console.log(servico);
+        
 
         preencherDadosServico(servico);
         preencherDadosCliente(servico._cliente);
 
-        if (servico.orcamento) {
-            preencherDadosOrcamento(servico.orcamento);
-            preencherItensOrcamento(servico.orcamento.itens);
+        if (servico._orcamento && servico._status != 'Em análise') {
+            preencherDadosOrcamento(servico._orcamento);
+            preencherItensOrcamento(servico._orcamento._itens);
         }
 
         renderizarAcoes(servico);
@@ -34,7 +34,9 @@ function preencherDadosServico(servico) {
     div.innerHTML = `
         <h3>Dados do Serviço</h3>
         <hr>
+        <br>
         <p><strong>Status:</strong> ${servico._status}</p>
+        <br>
         <p><strong>Descrição:</strong> ${servico._descricao}</p>
         
     `;
@@ -45,8 +47,11 @@ function preencherDadosCliente(cliente) {
     div.innerHTML = `
         <h3>Dados do Cliente</h3>
         <hr>
+        <br>
         <p><strong>Nome:</strong> ${cliente._nome}</p>
+        <br>
         <p><strong>Email:</strong> ${cliente._email}</p>
+        <br>
         <p><strong>Telefone:</strong> ${cliente._telefone}</p>
         
     `;
@@ -55,45 +60,70 @@ function preencherDadosCliente(cliente) {
 function preencherDadosOrcamento(orcamento) {
     const div = document.getElementById("dados-orcamento");
     div.innerHTML = `
-        <h3>Orçamento</h3>
-        <p><strong>Data:</strong> ${new Date(orcamento.data_orcamento).toLocaleDateString()}</p>
-        <p><strong>Valor Total:</strong> R$ ${orcamento.valor_total.toFixed(2)}</p>
+        <h2 style="text-align: center; margin-bottom: 20px;">Orçamento</h2>
+        <div style="display: flex; justify-content: space-around; margin-bottom: 20px;">
+            <div><strong>Data:</strong> ${new Date(orcamento._data_orcamento).toLocaleDateString()}</div>
+            <div><strong>Valor Total:</strong> R$ ${parseFloat(orcamento._valor_total).toFixed(2)}</div>
+        </div>
         <hr/>
     `;
 }
 
 function preencherItensOrcamento(itens) {
     const div = document.getElementById("itens-orcamento");
-    div.innerHTML = `<h3>Itens do Orçamento</h3>`;
+
+    // Começa a tabela
+    let html = `
+        <h3 style="margin-top: 30px;">Itens do Orçamento</h3>
+        <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+            <thead>
+                <tr style="background-color: #f0f0f0;">
+                    <th style="padding: 8px; border: 1px solid #ccc;">Peça</th>
+                    <th style="padding: 8px; border: 1px solid #ccc;">Valor Unitário</th>
+                    <th style="padding: 8px; border: 1px solid #ccc;">Quantidade</th>
+                    <th style="padding: 8px; border: 1px solid #ccc;">Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+    `;
+
     itens.forEach(item => {
-        div.innerHTML += `
-            <div class="item-orcamento">
-                <p><strong>Peça:</strong> ${item.descricao_peca}</p>
-                <p><strong>Valor Unitário:</strong> R$ ${item.valor_unitario.toFixed(2)}</p>
-                <p><strong>Quantidade:</strong> ${item.quantidade}</p>
-                <hr/>
-            </div>
+        const subtotal = item._quantidade * item._valor_unitario;
+        html += `
+            <tr>
+                <td style="padding: 8px; border: 1px solid #ccc;">${item._descricao_peca}</td>
+                <td style="padding: 8px; border: 1px solid #ccc;">R$ ${parseFloat(item._valor_unitario).toFixed(2)}</td>
+                <td style="padding: 8px; border: 1px solid #ccc;">${item._quantidade}</td>
+                <td style="padding: 8px; border: 1px solid #ccc;">R$ ${subtotal.toFixed(2)}</td>
+            </tr>
         `;
     });
+
+    html += `
+            </tbody>
+        </table>
+    `;
+
+    div.innerHTML = html;
 }
 
 function renderizarAcoes(servico) {
     const div = document.getElementById("acoes-status");
-    div.innerHTML = `<h3>Ações</h3>`;
+    
 
-    if (servico.status === "Em análise") {
-        div.innerHTML += `<button onclick="abrirTelaCriarOrcamento(${servico.id})">Criar Orçamento</button>`;
-    } else if (servico.status === "Aguardando confirmação") {
-        div.innerHTML += `<button onclick="atualizarStatus(${servico.id})">Confirmar</button>`;
-    } else if (servico.status === "Consertando") {
-        div.innerHTML += `<button onclick="atualizarStatus(${servico.id})">Prosseguir</button>`;
-    } else if (servico.status === "Aguardando pagamento") {
-        div.innerHTML += `<button onclick="atualizarStatus(${servico.id})">Finalizar</button>`;
+    if (servico._status === "Em análise") {
+        div.innerHTML += `<button onclick="abrirTelaCriarOrcamento('${servico._id}')">Gerenciar Orçamento</button>`;
+    } else if (servico._status === "Aguardando confirmação") {
+        div.innerHTML += `<button onclick="atualizarStatus(${servico._id})">Confirmar</button>`;
+    } else if (servico._status === "Consertando") {
+        div.innerHTML += `<button onclick="atualizarStatus(${servico._id})">Prosseguir</button>`;
+    } else if (servico._status === "Aguardando pagamento") {
+        div.innerHTML += `<button onclick="atualizarStatus(${servico._id})">Finalizar</button>`;
     }
 }
 
-function abrirTelaCriarOrcamento(servicoId) {
-    window.location.href = `criar-orcamento.html?servicoId=${servicoId}`;
+function abrirTelaCriarOrcamento(id) {
+    window.location.href = `/criar-orcamento-gerente.html?id=${id}`;
 }
 
 async function atualizarStatus(servicoId) {
