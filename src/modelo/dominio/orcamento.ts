@@ -7,13 +7,13 @@ export class Orcamento {
   
   private _data_orcamento: Date;
   private _valor_total: number;
-  private _itens: ItemOrcamento[];
+  private _itens: ItemOrcamento[] | null;
 
-  constructor(id: number, valor_total: number, itens: ItemOrcamento[], data_orcamento?: Date) {
+  constructor(id: number, valor_total: number, itens?: ItemOrcamento[], data_orcamento?: Date) {
     this._id = id;
     this._data_orcamento = data_orcamento ?? new Date(); // Se não vier, usa a data atual
     this._valor_total = valor_total;
-    this._itens = itens;
+    this._itens = itens || null;
   }
 
   // Getters e Setters
@@ -43,7 +43,7 @@ export class Orcamento {
     this._valor_total = valor_total;
   }
 
-  get itens(): ItemOrcamento[] {
+  get itens(): ItemOrcamento[] | null {
     return this._itens;
   }
 

@@ -10,15 +10,16 @@ export class ServicoDAO {
 
     public async criar(servico: Servico): Promise<Servico> {
         const query = `
-            INSERT INTO servico (cliente_id, descricao, status)
-            VALUES ($1, $2, $3)
+            INSERT INTO servico (cliente_id, descricao, status,orcamento_id)
+            VALUES ($1, $2, $3, $4)
             RETURNING id, data_criacao
         `;
 
         const values = [
             servico.cliente?.id ?? null,
             servico.descricao,
-            servico.status
+            servico.status,
+            servico.orcamento?.id
         ];
 
         try {
@@ -42,7 +43,7 @@ export class ServicoDAO {
                 SELECT s.id, s.descricao, s.status, c.nome AS cliente_nome
                 FROM servico s
                 JOIN cliente c ON s.cliente_id = c.id
-                WHERE s.status NOT IN ('Concluído', 'Cancelado')
+                WHERE s.status NOT IN ('Finalizado', 'Cancelado')
             `;
 
         const result = await db.query(query);
@@ -141,6 +142,36 @@ export class ServicoDAO {
         ));
 
         return itens;
+    }
+
+    async atualizarStatus(servico:Servico | null): Promise<Servico | null> {
+        
+
+        if (!servico) {
+            throw new Error("Serviço não encontrado.");
+        }
+
+         const query = `
+            UPDATE servico SET status = $1 
+            WHERE id = $2
+        `;
+
+        const values = [
+            servico.status,
+            servico.id
+        ];
+
+        try {
+            const result = await db.query(query, values);
+            
+
+            return servico;
+
+        } catch (error) {
+            console.error('Erro na criação do serviço', error);
+            throw error;
+        }
+
     }
 
 

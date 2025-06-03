@@ -7,6 +7,7 @@
     padding: 6vh;
     max-width: 180vh;
     border-radius: 16px;
+    max-height: fit-content;
     margin-top: 2vh;
     margin: 0 auto;
     margin-top: 12vh;
@@ -28,11 +29,30 @@
     padding: 20px;
     border-radius: 8px;
     background-color: #fafafa;
+    align-items: stretch;
+}
+.secao-inferior {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 30px;
+    border: 2px solid #ccc; /* Borda contornada */
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #fafafa;
+    align-items: stretch;
 }
 
 /* Cada seção (serviço ou cliente) */
 .secao {
     flex: 1;
+}
+
+/* Separador vertical */
+.separador-vertical {
+    width: 2px;
+    background-color: #ccc;
+    margin: 0 10px;
 }
 
 /* Tabelas */
@@ -59,6 +79,9 @@ th {
 #acoes-status {
     margin-bottom: 30px;
 }
+#acoes-status.secao{
+    text-align: end;
+}
 
 /* Botões */
 button {
@@ -75,8 +98,12 @@ button:hover {
     background-color: #0056b3;
 }
 
+/* Responsividade */
 @media (max-width: 768px) {
     .secao-superior {
         flex-direction: column;
+    }
+    .separador-vertical {
+        display: none;
     }
 }

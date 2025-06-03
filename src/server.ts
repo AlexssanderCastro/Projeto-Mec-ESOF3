@@ -6,6 +6,8 @@ import usuario from './routes/usuario.routes';
 import gerente from './routes/gerente.routes';
 import funcionario from './routes/funcionario.routes';
 import servico from './routes/servico.routes';
+import orcamento from './routes/orcamento.routes';
+import itens from './routes/itens_orcamento.routes';
 import session from 'express-session';
 
 const app = express();
@@ -24,20 +26,18 @@ app.use(session({
   cookie: { secure: false } // coloque como true apenas se usar HTTPS
 }));
 
-// Servindo arquivos estáticos (CSS, JS, imagens, etc.)
+
 app.use(express.static(path.join(__dirname, 'public')));
 
-//Telas padrão
+
 app.use(index);
-
 app.use(usuario);
-
-//Telas Cliente
 app.use(cliente);
-
 app.use(gerente);
 app.use(funcionario);
 app.use(servico);
+app.use(orcamento);
+app.use(itens);
 
 // Iniciando o servidor
 app.listen(PORT, () => {

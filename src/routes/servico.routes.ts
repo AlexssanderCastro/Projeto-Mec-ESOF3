@@ -32,4 +32,6 @@ router.get('/servicos-ativos', (req, res) => servicoController.listarAtivos(req,
 
 router.get('/buscar-servico/:id', (req, res) =>servicoController.buscarServicoPorId(req, res));
 
+router.put("/atualizar-status", (req, res) => servicoController.atualizarStatus(req, res));
+
 export default router;
