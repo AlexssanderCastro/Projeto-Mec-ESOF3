@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/gerenciar-funcionario.css">
     <script src="/js/gerente.js"></script>
 
     <title>Home</title>
@@ -64,18 +65,29 @@
     </header>
 
     <div class="container">
-        <div class="overlay">
-            <div class="slogan-left">
-                <h1 class="slogan-titulo">Venha nos conhecer!!</h1>
-
-                <p class="texto-slogan">
-                    Venha para a Master Car Auto Peças e Mecânica
-                    porque seu carro merece o melhor cuidado, qualidade,
-                    confiança e precisão em cada serviço!
-                </p>
-            </div>
+        <div class="tabela-container">
+            <h2>Lista de Funcionários</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>CPF</th>
+                        <th>Data Nasc.</th>
+                        <th>Cargo</th>
+                        <th>Salário</th>
+                        <th>Email</th>
+                        <th>Telefone</th>
+                        <th>Endereço</th>
+                        <th>Login</th>
+                        <th>Perfil</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="tabela-funcionarios">
+                    <!-- Dados carregados via JS -->
+                </tbody>
+            </table>
         </div>
-        <img class="slogan-img" src="../img/imagem-fundo-slogan.jpg" alt="Fundo">
     </div>
 
     <footer>
@@ -120,6 +132,9 @@
             </div>
         </div>
     </footer>
+
+
+    <script src="/js/script-gerenciar-funcionarios.js"></script>
 </body>
 
 </html>

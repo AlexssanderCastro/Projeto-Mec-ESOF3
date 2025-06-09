@@ -1,0 +1,67 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #1d1d1d;
+}
+
+.container {
+    max-width: 100%;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 8px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.tabela-container {
+  overflow-x: auto;
+  overflow-y: auto;
+  max-width: 100%;
+}
+
+
+table {
+    width: max-content;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #eaeaea;
+    font-weight: bold;
+}
+
+td {
+    background-color: #fff;
+}
+
+.btn {
+    padding: 6px 12px;
+    margin: 0 2px;
+    border: none;
+    cursor: pointer;
+    color: white;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.btn-editar {
+    background-color: #007bff;
+}
+
+.btn-excluir {
+    background-color: #dc3545;
+}
