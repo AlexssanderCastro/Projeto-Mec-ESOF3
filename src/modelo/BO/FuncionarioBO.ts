@@ -8,15 +8,32 @@ export class FuncionarioBO {
     this.funcionarioDAO = new FuncionarioDAO();
   }
 
-  public async buscarPorCpf(cpf:string): Promise<boolean> {
-      return this.funcionarioDAO.buscarPorCpf(cpf);
+  public async buscarPorCpf(cpf: string): Promise<boolean> {
+    return this.funcionarioDAO.buscarPorCpf(cpf);
   }
 
   async inserir(funcionario: Funcionario): Promise<boolean> {
-    // Aqui você pode adicionar validações de negócio, por exemplo:
 
     return await this.funcionarioDAO.inserir(funcionario);
   }
 
-  // Outros métodos como atualizar, excluir, buscar etc., podem ser adicionados depois
+  async atualizar(funcionario: Funcionario): Promise<boolean> {
+
+    return await this.funcionarioDAO.atualizar(funcionario);
+  }
+
+  async listar(): Promise<Funcionario[] | null> {
+    return await this.funcionarioDAO.listarTodos();
+  }
+
+  async buscarPorId(id: number): Promise<Funcionario | null> {
+    return await this.funcionarioDAO.buscarPorId(id);
+  }
+
+  public async excluir(id: number): Promise<boolean> {
+    return await this.funcionarioDAO.excluir(id);
+  }
+
+
+  
 }

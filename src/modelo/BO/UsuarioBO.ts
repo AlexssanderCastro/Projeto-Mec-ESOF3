@@ -16,6 +16,11 @@ export class UsuarioBO {
       return this.usuarioDAO.buscarPorLoginSenha(login, senha);
     }
 
+    public async atualizar(usuario: Usuario): Promise<boolean> {
+  
+      const resultado = await this.usuarioDAO.atualizar(usuario);
+      return resultado;
+    }
 
     
     // Valida o cadastro do usuário

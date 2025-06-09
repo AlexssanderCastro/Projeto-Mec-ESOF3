@@ -18,12 +18,13 @@ document.addEventListener('DOMContentLoaded', async function () {
                 <hr>
                 <div class="descricao-label">Descrição</div>
                 <div class="descricao-texto">${servico.descricao}</div>
-                <a href="gerenciar-servico.html?id=${servico.id}" class="botao-gerenciar">Gerenciar</a>
+                <a href=# class="botao-gerenciar">Gerenciar</a>
             `;
 
 
             card.addEventListener('click', () => {
-                window.location.href = `/gerenciar-servico-gerente.html?id=${servico.id}`;
+                sessionStorage.setItem('servicoId', servico.id);
+                window.location.href = '/gerenciar-servico-gerente.html';
             });
 
             container.appendChild(card);

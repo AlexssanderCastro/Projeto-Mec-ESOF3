@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", async () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const servicoId = urlParams.get("id");
+
+    const servicoId = sessionStorage.getItem('servicoId');
     
     if (!servicoId) {
         alert("ID do serviço não informado.");

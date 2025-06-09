@@ -1,8 +1,36 @@
 import { Router } from 'express';
-import FuncionarioController from '../controlador/FuncionarioController';
+import {FuncionarioController} from '../controlador/FuncionarioController';
 
 const router = Router();
 
-router.post('/cadastrar-funcionario', FuncionarioController.cadastrar);
+const funcionarioController = new FuncionarioController();
+
+router.post('/cadastrar-funcionario', (req, res) =>funcionarioController.cadastrar(req, res));
+
+router.get('/listar-funcionarios', (req, res) => funcionarioController.listar(req, res));
+
+router.get('/buscar-funcionario/:id', (req, res) => funcionarioController.buscarPorId(req, res));
+
+router.post('/editar-funcionario', async (req, res, next) => {
+  try {
+    await funcionarioController.editar(req, res);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.delete('/excluir-funcionario/:id', async (req, res, next) => {
+  try {
+    await funcionarioController.excluir(req, res);
+  } catch (err) {
+    next(err);
+  }
+});
+
+
+
+
+
+
 
 export default router;
