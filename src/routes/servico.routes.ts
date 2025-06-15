@@ -22,8 +22,16 @@ router.get('/gerenciar-servicos-gerente.html', (req: Request, res: Response) => 
   res.sendFile(path.join(__dirname, '..', 'views', 'gerenciar-servicos-gerente.html'));
 });
 
+router.get('/gerenciar-servicos-funcionario.html', (req: Request, res: Response) => {
+  res.sendFile(path.join(__dirname, '..', 'views', 'gerenciar-servicos-funcionario.html'));
+});
+
 router.get('/gerenciar-servico-gerente.html', (req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, '..', 'views', 'gerenciar-servico-gerente.html'));
+});
+
+router.get('/gerenciar-servico-funcionario.html', (req: Request, res: Response) => {
+  res.sendFile(path.join(__dirname, '..', 'views', 'gerenciar-servico-funcionario.html'));
 });
 
 router.post('/criar-servico', (req, res) => servicoController.criar(req, res));

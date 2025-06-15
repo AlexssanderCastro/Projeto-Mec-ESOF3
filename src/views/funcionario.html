@@ -5,10 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/index.css">
-    <link rel="stylesheet" href="../css/gerenciar-servicos.css">
     <script src="/js/gerente.js"></script>
 
-    <title>Gerenciar Serviços</title>
+    <title>Home</title>
 </head>
 
 
@@ -18,10 +17,10 @@
             <div class="div-logo">
                 <ul class="home-logo">
                     <li>
-                        <a href="/gerente.html"><img src="../img/logo-MCAM.png" class="logo"></a>
+                        <a href="/funcionario.html"><img src="../img/logo-MCAM.png" class="logo"></a>
                     </li>
                     <li>
-                        <a href="/gerente.html" class="link-limpo">Home</a>
+                        <a href="/funcionario.html" class="link-limpo">Home</a>
                     </li>
                 </ul>
 
@@ -31,21 +30,15 @@
                 <li>
                     <select class="servG">
                         <option class="opcao-select" value="" selected disabled>Serviços</option>
-                        <option class="opcao-select" value="/criar-servico-gerente.html">Criar</option>
-                        <option class="opcao-select" value="/gerenciar-servicos-gerente.html">Gerenciar</option>
+                        <option class="opcao-select" value="/criar-servico-funcionario.html">Criar</option>
+                        <option class="opcao-select" value="/gerenciar-servicos-funcionario.html">Gerenciar</option>
                     </select>
                 </li>
 
                 <li>
                     <a href="#" class="link-limpo">Clientes</a>
                 </li>
-                <li>
-                    <select class="servG">
-                        <option class="opcao-select" value="" selected disabled>Funcionários</option>
-                        <option class="opcao-select" value="/cadastro-funcionario.html">Cadastrar</option>
-                        <option class="opcao-select" value="/gerenciar-funcionario.html">Gerenciar</option>
-                    </select>
-                </li>
+                
                 <li>
                     <a href="\logout" class="link-limpo">Sair</a>
                 </li>
@@ -64,12 +57,19 @@
         </div>
     </header>
 
-
     <div class="container">
-        <h1 class="titulo-listagem-servicos">Serviços em Andamento</h1>
-        <div id="cards-servicos" class="cards-container">
-            <!-- Cards dos serviços serão inseridos aqui -->
+        <div class="overlay">
+            <div class="slogan-left">
+                <h1 class="slogan-titulo">Venha nos conhecer!!</h1>
+
+                <p class="texto-slogan">
+                    Venha para a Master Car Auto Peças e Mecânica
+                    porque seu carro merece o melhor cuidado, qualidade,
+                    confiança e precisão em cada serviço!
+                </p>
+            </div>
         </div>
+        <img class="slogan-img" src="../img/imagem-fundo-slogan.jpg" alt="Fundo">
     </div>
 
     <footer>
@@ -85,17 +85,11 @@
                     <select class="sef servG">
                         <option class="opcao-select-footer" value="" selected disabled>Serviços</option>
 
-                        <option class="opcao-select-footer" value="/criar-servico-gerente.html">Criar</option>
-                        <option class="opcao-select-footer" value="/gerenciar-servicos-gerente.html">Gerenciar</option>
+                        <option class="opcao-select-footer" value="/criar-servico-funcionario.html">Criar</option>
+                        <option class="opcao-select-footer" value="/gerenciar-servicos-funcionario.html">Gerenciar</option>
                     </select>
                 </li>
-                <li>
-                    <select class="sef servG">
-                        <option class="opcao-select" value="" selected disabled>Funcionários</option>
-                        <option class="opcao-select" value="/cadastro-funcionario.html">Criar</option>
-                        <option class="opcao-select" value="/gerenciar-funcionario.html">Gerenciar</option>
-                    </select>
-                </li>
+                
             </ul>
         </div>
 
@@ -121,9 +115,6 @@
             </div>
         </div>
     </footer>
-
-    <script src="js/gerenciar-servicos.js"></script>
-
 </body>
 
 </html>

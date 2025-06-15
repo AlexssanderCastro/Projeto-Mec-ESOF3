@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../css/index.css">
     <link rel="stylesheet" href="/css/cadastro-funcionario.css">
     <script src="/js/gerente.js"></script>
-    <title>Home</title>
+    <title>Editar Funcionário</title>
 </head>
 
 
@@ -117,7 +117,7 @@
 
     <footer>
         <div class="logo-footer">
-            <a href="/gerente.html"><img src="../img/logo-fundo-branco-MCAM.png" class="logo-fundo-branco"></a>
+            <a href="index.html"><img src="../img/logo-fundo-branco-MCAM.png" class="logo-fundo-branco"></a>
         </div>
         <div class="opcoes-footer-pai">
             <ul class="opcoes-footer">
@@ -125,14 +125,23 @@
                     <li class="home-footer">Home</li>
                 </a>
                 <li>
-                    <select class="sef">
-                        <option class="opcao-select" value="" selected disabled>Serviços</option>
-                        <option class="opcao-select" value="/criar-servico-gerente.html">Criar</option>
-                        <option class="opcao-select" value="/gerenciar-servicos-gerente.html">Gerenciar</option>
+                    <select class="sef servG">
+                        <option class="opcao-select-footer" value="" selected disabled>Serviços</option>
+
+                        <option class="opcao-select-footer" value="/criar-servico-gerente.html">Criar</option>
+                        <option class="opcao-select-footer" value="/gerenciar-servicos-gerente.html">Gerenciar</option>
+                    </select>
+                </li>
+                <li>
+                    <select class="sef servG">
+                        <option class="opcao-select" value="" selected disabled>Funcionários</option>
+                        <option class="opcao-select" value="/cadastro-funcionario.html">Criar</option>
+                        <option class="opcao-select" value="/gerenciar-funcionario.html">Gerenciar</option>
                     </select>
                 </li>
             </ul>
         </div>
+
         <div class="contatos" id="Contatos">
             <div class="contatos-filho">
                 <h1>Contatos:</h1>
