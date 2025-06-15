@@ -1,9 +1,16 @@
-import { Router } from 'express';
+
+import path from 'path';
+import { Router, Request, Response } from 'express';
 import {FuncionarioController} from '../controlador/FuncionarioController';
 
 const router = Router();
 
 const funcionarioController = new FuncionarioController();
+
+
+router.get('/funcionario.html', (req: Request, res: Response) => {
+  res.sendFile(path.join(__dirname, '..', 'views', 'funcionario.html'));
+});
 
 router.post('/cadastrar-funcionario', (req, res) =>funcionarioController.cadastrar(req, res));
 

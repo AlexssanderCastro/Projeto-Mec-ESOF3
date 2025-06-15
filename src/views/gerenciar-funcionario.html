@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../css/gerenciar-funcionario.css">
     <script src="/js/gerente.js"></script>
 
-    <title>Home</title>
+    <title>Gerenciar Funcionários</title>
 </head>
 
 
@@ -64,31 +64,31 @@
         </div>
     </header>
 
-    <div class="container">
-        <div class="tabela-container">
-            <h2>Lista de Funcionários</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>CPF</th>
-                        <th>Data Nasc.</th>
-                        <th>Cargo</th>
-                        <th>Salário</th>
-                        <th>Email</th>
-                        <th>Telefone</th>
-                        <th>Endereço</th>
-                        <th>Login</th>
-                        <th>Perfil</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody id="tabela-funcionarios">
-                    <!-- Dados carregados via JS -->
-                </tbody>
-            </table>
+        <div class="container">
+            <div class="tabela-container">
+                <h2>Lista de Funcionários</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>CPF</th>
+                            <th>Data Nasc.</th>
+                            <th>Cargo</th>
+                            <th>Salário</th>
+                            <th>Email</th>
+                            <th>Telefone</th>
+                            <th>Endereço</th>
+                            <th>Login</th>
+                            <th>Perfil</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabela-funcionarios">
+                        <!-- Dados carregados via JS -->
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
 
     <footer>
         <div class="logo-footer">
@@ -100,11 +100,18 @@
                     <li class="home-footer">Home</li>
                 </a>
                 <li>
-                    <select class="sef">
+                    <select class="sef servG">
                         <option class="opcao-select-footer" value="" selected disabled>Serviços</option>
 
                         <option class="opcao-select-footer" value="/criar-servico-gerente.html">Criar</option>
                         <option class="opcao-select-footer" value="/gerenciar-servicos-gerente.html">Gerenciar</option>
+                    </select>
+                </li>
+                <li>
+                    <select class="sef servG">
+                        <option class="opcao-select" value="" selected disabled>Funcionários</option>
+                        <option class="opcao-select" value="/cadastro-funcionario.html">Criar</option>
+                        <option class="opcao-select" value="/gerenciar-funcionario.html">Gerenciar</option>
                     </select>
                 </li>
             </ul>
