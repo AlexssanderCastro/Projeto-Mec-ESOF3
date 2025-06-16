@@ -28,27 +28,68 @@ export class ServicoBO {
         }));
     }
 
+    public async buscarAtivosCliente(id: number): Promise<any[]> {
+        const servicos = await this.servicoDAO.buscarAtivosCliente(id);
+
+        return servicos.map(s => ({
+            id: s.id,
+            descricao: s.descricao,
+            status: s.status,
+            clienteNome: s.cliente?.nome ?? 'Desconhecido',
+        }));
+    }
+
+    public async buscarInativosCliente(id: number): Promise<any[]> {
+        const servicos = await this.servicoDAO.buscarInativosCliente(id);
+
+        return servicos.map(s => ({
+            id: s.id,
+            descricao: s.descricao,
+            status: s.status,
+            clienteNome: s.cliente?.nome ?? 'Desconhecido',
+        }));
+    }
+
     public async buscarServicoPorId(id: number): Promise<Servico | null> {
-        
+
         return await this.servicoDAO.buscarServicoPorId(id);
     }
 
     async atualizarStatus(id: number) {
         const servico = await this.buscarServicoPorId(id);
-        if(servico){
-            if(servico.status==='Em análise'){
-                servico.status='Aguardando confirmação';
-            }else if(servico.status==='Aguardando confirmação'){
-                servico.status='Consertando';
-            }else if(servico.status==='Aguardando pagamento'){
-                servico.status='Finalizado';
-            }else if(servico.status==='Consertando'){
-                servico.status='Aguardando pagamento';
+        if (servico) {
+            if (servico.status === 'Em análise') {
+                servico.status = 'Aguardando confirmação';
+            } else if (servico.status === 'Aguardando confirmação') {
+                servico.status = 'Consertando';
+            } else if (servico.status === 'Aguardando pagamento') {
+                servico.status = 'Finalizado';
+            } else if (servico.status === 'Consertando') {
+                servico.status = 'Aguardando pagamento';
             }
 
         }
-        
+
         return await this.servicoDAO.atualizarStatus(servico);
+    }
+
+    async cancelarServico(id: number) {
+        const servico = await this.buscarServicoPorId(id);
+        if (servico) {
+            if(servico.status=="Aguardando confirmação"){
+                servico.status="Cancelado";
+            }else{
+                return null;
+            }
+        }else{
+            return null;
+        }
+
+        return await this.servicoDAO.atualizarStatus(servico);
+    }
+
+    public async gerarRelatorio() {
+        return await this.servicoDAO.gerarRelatorio();
     }
 
 }

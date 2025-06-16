@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", async () => {
 
     const servicoId = sessionStorage.getItem('servicoId');
-    
+
     if (!servicoId) {
         alert("ID do serviço não informado.");
         return;
@@ -10,10 +10,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
         const resposta = await fetch(`/buscar-servico/${servicoId}`);
         const servico = await resposta.json();
-        if(!servico){
+        if (!servico) {
             alert("Problema ao buscar serviço")
         }
-        
+
 
         preencherDadosServico(servico);
         preencherDadosCliente(servico._cliente);
@@ -109,12 +109,12 @@ function preencherItensOrcamento(itens) {
 
 function renderizarAcoes(servico) {
     const div = document.getElementById("acoes-status");
-    
+
 
     if (servico._status === "Em análise") {
         div.innerHTML += `<button onclick="abrirTelaCriarOrcamento('${servico._id}')">Gerenciar Orçamento</button>`;
     } else if (servico._status === "Aguardando confirmação") {
-        div.innerHTML += `<button onclick="atualizarStatus(${servico._id})">Confirmar</button>`;
+        div.innerHTML += `<button class="danger-btn" onclick="cancelarServico(${servico._id})">Cancelar</button>`;
     } else if (servico._status === "Consertando") {
         div.innerHTML += `<button onclick="atualizarStatus(${servico._id})">Prosseguir</button>`;
     } else if (servico._status === "Aguardando pagamento") {
@@ -143,5 +143,28 @@ async function atualizarStatus(servicoId) {
         }
     } catch (err) {
         console.error("Erro na atualização:", err);
+    }
+}
+
+async function cancelarServico(servicoId) {
+    const confirmacao = confirm("Tem certeza que deseja cancelar este serviço?");
+    if (!confirmacao) return;
+
+    try {
+        const resposta = await fetch(`/cancelar-servico`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id: servicoId })
+        });
+
+        if (resposta.ok) {
+            alert("Serviço cancelado com sucesso!");
+            window.location.reload();
+        } else {
+            const erro = await resposta.text();
+            alert("Erro ao cancelar Serviço: " + erro);
+        }
+    } catch (err) {
+        console.error("Erro no cancelamento:", err);
     }
 }

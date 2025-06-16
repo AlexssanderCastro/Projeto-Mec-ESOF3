@@ -38,8 +38,16 @@ router.post('/criar-servico', (req, res) => servicoController.criar(req, res));
 
 router.get('/servicos-ativos', (req, res) => servicoController.listarAtivos(req, res));
 
+router.get('/servicos-ativos-cliente', (req, res) => servicoController.listarAtivosCliente(req, res));
+
+router.get('/servicos-inativos-cliente', (req, res) => servicoController.listarInativosCliente(req, res));
+
 router.get('/buscar-servico/:id', (req, res) =>servicoController.buscarServicoPorId(req, res));
 
+router.get('/relatorio-servicos', (req, res) =>servicoController.gerarRelatorio(req, res));
+
 router.put("/atualizar-status", (req, res) => servicoController.atualizarStatus(req, res));
+
+router.put("/cancelar-servico", (req, res) => servicoController.cancelarServico(req, res));
 
 export default router;

@@ -19,6 +19,18 @@ router.get('/editar-funcionario.html', (req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, '..', 'views', 'editar-funcionario.html'));
 });
 
+router.get('/listar-clientes-gerente.html', (req: Request, res: Response) => {
+  res.sendFile(path.join(__dirname, '..', 'views', 'listar-clientes-gerente.html'));
+});
+
+router.get('/listar-clientes-funcionario.html', (req: Request, res: Response) => {
+  res.sendFile(path.join(__dirname, '..', 'views', 'listar-clientes-funcionario.html'));
+});
+
+router.get('/relatorio-gerente.html', (req: Request, res: Response) => {
+  res.sendFile(path.join(__dirname, '..', 'views', 'relatorio-gerente.html'));
+});
+
 
 
 

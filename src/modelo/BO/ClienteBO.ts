@@ -24,6 +24,12 @@ export class ClienteBO {
         return resultadoCliente;
     }
 
+    public async editar(cliente: Cliente): Promise<boolean> {
+
+        const resultadoCliente = await this.clienteDAO.editar(cliente);
+        return resultadoCliente;
+    }
+
     async buscarPorUsuario(usuario: Usuario): Promise<Cliente | null> {
         return await this.clienteDAO.buscarPorUsuario(usuario);
     }
@@ -31,9 +37,9 @@ export class ClienteBO {
     public async buscarClientes(): Promise<Cliente[]> {
         const clientesJson = await this.clienteDAO.buscarClientes();
         const usuarioTemporario = new Usuario(0, '', '', 'cliente');
-        
+
         return clientesJson.map((json: any) => {
-            
+
             return new Cliente(
                 json.id,
                 usuarioTemporario,
@@ -41,8 +47,22 @@ export class ClienteBO {
                 new Date(json.data_nascimento),
                 json.cpf,
                 json.email,
-                json.telefone
+                json.telefone, 
+                json.endereco
             );
         });
     }
+
+    public async buscarTodosClientes(): Promise<Cliente[]> {
+        try {
+            const clientes = await this.clienteDAO.buscarTodosClientes();
+            return clientes;
+        } catch (error) {
+            console.error("Erro no BO ao buscar clientes:", error);
+            return [];
+        }
+    }
+
+
+
 }

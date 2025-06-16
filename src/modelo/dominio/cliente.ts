@@ -11,7 +11,7 @@ export class Cliente {
   private _cpf: string;
   private _email: string;
 
-  constructor(id: number, usuario: Usuario, nome: string, data_nascimento: Date, cpf: string, email: string,telefone: string) {
+  constructor(id: number, usuario: Usuario, nome: string, data_nascimento: Date, cpf: string, email: string,telefone: string, endereco: string | null) {
     this._id = id;
     this._usuario = usuario;
     this._nome = nome;
@@ -19,7 +19,7 @@ export class Cliente {
     this._cpf = cpf;
     this._email = email;
     this._telefone = telefone;
-    this._endereco = null;
+    this._endereco = endereco;
   }
 
   // Getters and Setters

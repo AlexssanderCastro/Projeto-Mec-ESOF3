@@ -49,7 +49,39 @@ export class ServicoDAO {
         const result = await db.query(query);
 
         return result.rows.map(row => {
-            const cliente = new Cliente(row.cliente_id, undefined!, row.cliente_nome, new Date(), '', '', '');
+            const cliente = new Cliente(row.cliente_id, undefined!, row.cliente_nome, new Date(), '', '', '', null);
+            return new Servico(row.id, row.descricao, row.status, cliente);
+        });
+    }
+
+    public async buscarAtivosCliente(id: number): Promise<Servico[]> {
+        const query = `
+                SELECT s.id, s.descricao, s.status, c.nome AS cliente_nome
+                FROM servico s
+                JOIN cliente c ON s.cliente_id = c.id
+                WHERE s.status NOT IN ('Finalizado', 'Cancelado') AND c.usuario_id = $1
+            `;
+
+        const result = await db.query(query, [id]);
+
+        return result.rows.map(row => {
+            const cliente = new Cliente(row.cliente_id, undefined!, row.cliente_nome, new Date(), '', '', '', null);
+            return new Servico(row.id, row.descricao, row.status, cliente);
+        });
+    }
+
+    public async buscarInativosCliente(id: number): Promise<Servico[]> {
+        const query = `
+                SELECT s.id, s.descricao, s.status, c.nome AS cliente_nome
+                FROM servico s
+                JOIN cliente c ON s.cliente_id = c.id
+                WHERE s.status IN ('Finalizado', 'Cancelado') AND c.usuario_id = $1
+            `;
+
+        const result = await db.query(query, [id]);
+
+        return result.rows.map(row => {
+            const cliente = new Cliente(row.cliente_id, undefined!, row.cliente_nome, new Date(), '', '', '', null);
             return new Servico(row.id, row.descricao, row.status, cliente);
         });
     }
@@ -74,9 +106,9 @@ export class ServicoDAO {
             LEFT JOIN orcamento o ON s.orcamento_id = o.id
             WHERE s.id = $1
         `;
-        
+
         const result = await db.query(query, [id]);
-        
+
         if (result.rows.length === 0) {
             return null;
         }
@@ -93,7 +125,8 @@ export class ServicoDAO {
             new Date(),
             '',
             row.cliente_email,
-            row.cliente_telefone
+            row.cliente_telefone,
+            null
 
         );
 
@@ -144,14 +177,14 @@ export class ServicoDAO {
         return itens;
     }
 
-    async atualizarStatus(servico:Servico | null): Promise<Servico | null> {
-        
+    async atualizarStatus(servico: Servico | null): Promise<Servico | null> {
+
 
         if (!servico) {
             throw new Error("Serviço não encontrado.");
         }
 
-         const query = `
+        const query = `
             UPDATE servico SET status = $1 
             WHERE id = $2
         `;
@@ -163,7 +196,7 @@ export class ServicoDAO {
 
         try {
             const result = await db.query(query, values);
-            
+
 
             return servico;
 
@@ -172,6 +205,46 @@ export class ServicoDAO {
             throw error;
         }
 
+    }
+
+    public async listarTodos(): Promise<Servico[]> {
+        const query = `
+                SELECT s.id, s.descricao, s.status, c.nome AS cliente_nome
+                FROM servico s
+                JOIN cliente c ON s.cliente_id = c.id
+            `;
+
+        const result = await db.query(query);
+
+        return result.rows.map(row => {
+            const cliente = new Cliente(row.cliente_id, undefined!, row.cliente_nome, new Date(), '', '', '', null);
+            return new Servico(row.id, row.descricao, row.status, cliente);
+        });
+    }
+
+
+    public async gerarRelatorio(): Promise<{
+        total: number;
+        finalizados: number;
+        cancelados: number;
+        servicos: Servico[];
+    }> {
+        try {
+            const totalQuery = await db.query("SELECT COUNT(*) FROM servico");
+            const finalizadosQuery = await db.query("SELECT COUNT(*) FROM servico WHERE status = 'Finalizado'");
+            const canceladosQuery = await db.query("SELECT COUNT(*) FROM servico WHERE status = 'Cancelado'");
+            const listaServicos = await this.listarTodos();
+
+            return {
+                total: parseInt(totalQuery.rows[0].count),
+                finalizados: parseInt(finalizadosQuery.rows[0].count),
+                cancelados: parseInt(canceladosQuery.rows[0].count),
+                servicos: listaServicos
+            };
+        } catch (erro) {
+            console.error("Erro ao gerar relatório:", erro);
+            throw erro;
+        }
     }
 
 

@@ -1,0 +1,53 @@
+body {
+  font-family: Arial, sans-serif;
+  
+  background-color: #ebe1e1;
+  max-height: fit-content;
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+}
+
+.container{
+    margin-top: 2vh;
+    
+}
+#filtro-nome {
+  display: block;
+  margin: 0 auto 20px auto;
+  padding: 10px;
+  width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+table {
+  width: 90%;
+  max-width: 200vh;
+  
+  border-collapse: collapse;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  margin: 0 auto;
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
+thead {
+  background-color: #007BFF;
+  color: white;
+}
+
+th, td {
+  text-align: left;
+  padding: 2vh;
+  border-bottom: 1px solid #ddd;
+}
+
+
+
+td {
+  color: #333;
+}

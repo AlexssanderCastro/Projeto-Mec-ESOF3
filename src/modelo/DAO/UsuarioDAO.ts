@@ -31,6 +31,36 @@ export class UsuarioDAO {
     }
   }
 
+  public async editar(usuario: Usuario): Promise<boolean> {
+    try {
+      const result = await db.query(
+        'UPDATE usuario SET login = $1  WHERE id = $2',
+        [usuario.login, usuario.id]
+      );
+
+     return (result.rowCount ?? 0) > 0;
+
+    } catch (error) {
+      console.error('Erro ao atualizar usuário:', error);
+      return false;
+    }
+  }
+
+  public async trocarSenha(usuario: Usuario): Promise<boolean> {
+    try {
+      const result = await db.query(
+        'UPDATE usuario SET senha = $1  WHERE id = $2',
+        [usuario.senha, usuario.id]
+      );
+
+     return (result.rowCount ?? 0) > 0;
+
+    } catch (error) {
+      console.error('Erro ao atualizar usuário:', error);
+      return false;
+    }
+  }
+
 
   public async buscarPorLogin(login: string): Promise<boolean> {
 

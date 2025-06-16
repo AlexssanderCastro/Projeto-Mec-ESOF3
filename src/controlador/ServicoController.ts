@@ -24,7 +24,7 @@ export class ServicoController {
 
             const usuario = new Usuario(0, '', '', 'cliente');
 
-            const cliente = new Cliente(clienteId, usuario, '', new Date(), '', '', '');
+            const cliente = new Cliente(clienteId, usuario, '', new Date(), '', '', '',null);
 
 
             const servico = new Servico(0, descricao, 'Em análise', cliente, orcamento);
@@ -50,6 +50,38 @@ export class ServicoController {
         }
     }
 
+    public async listarAtivosCliente(req: Request, res: Response): Promise<void> {
+        const usuarioLogado = req.session.usuario;
+        if (!usuarioLogado) {
+            res.status(401).json({ mensagem: "Usuário não autenticado." });
+            return
+        }
+        console.log(usuarioLogado.id)
+        try {
+            const servicos = await this.servicoBO.buscarAtivosCliente(usuarioLogado.id);
+            res.status(200).json(servicos);
+        } catch (error) {
+            console.error('Erro ao buscar serviços ativos:', error);
+            res.status(500).json({ mensagem: 'Erro ao buscar serviços ativos' });
+        }
+    }
+
+    public async listarInativosCliente(req: Request, res: Response): Promise<void> {
+        const usuarioLogado = req.session.usuario;
+        if (!usuarioLogado) {
+            res.status(401).json({ mensagem: "Usuário não autenticado." });
+            return
+        }
+        console.log(usuarioLogado.id)
+        try {
+            const servicos = await this.servicoBO.buscarInativosCliente(usuarioLogado.id);
+            res.status(200).json(servicos);
+        } catch (error) {
+            console.error('Erro ao buscar serviços ativos:', error);
+            res.status(500).json({ mensagem: 'Erro ao buscar serviços ativos' });
+        }
+    }
+
     public async buscarServicoPorId(req: Request, res: Response): Promise<void> {
         const id = parseInt(req.params.id, 10);
 
@@ -66,7 +98,7 @@ export class ServicoController {
                 res.status(404).json({ erro: 'Serviço não encontrado' });
                 return;
             }
-            
+
             res.status(200).json(servico);
         } catch (erro) {
             console.error('Erro ao buscar serviço:', erro);
@@ -88,6 +120,45 @@ export class ServicoController {
         } catch (erro) {
             console.error("Erro ao atualizar status:", erro);
             res.status(500).send("Erro ao atualizar status.");
+        }
+    }
+
+    async cancelarServico(req: Request, res: Response): Promise<void> {
+        const { id } = req.body;
+
+        if (!id) {
+            res.status(400).json({ erro: "ID do serviço não foi fornecido." });
+            return;
+        }
+
+        try {
+            const servicoAtualizado = await this.servicoBO.cancelarServico(Number(id));
+            res.status(200).json({ mensagem: "Status cancelado com sucesso", servico: servicoAtualizado });
+        } catch (erro) {
+            console.error("Erro ao cancelar status:", erro);
+            res.status(500).send("Erro ao cancelar.");
+        }
+    }
+
+
+    public async gerarRelatorio(req: Request, res: Response): Promise<void> {
+        try {
+            const relatorio = await this.servicoBO.gerarRelatorio();
+
+            const taxaCancelamento = relatorio.total > 0
+                ? ((relatorio.cancelados / relatorio.total) * 100).toFixed(2)
+                : "0.00";
+
+            res.json({
+                total: relatorio.total,
+                finalizados: relatorio.finalizados,
+                cancelados: relatorio.cancelados,
+                taxaCancelamento,
+                servicos: relatorio.servicos
+            });
+        } catch (erro) {
+            console.error("Erro ao gerar relatório:", erro);
+            res.status(500).json({ mensagem: "Erro ao gerar relatório." });
         }
     }
 

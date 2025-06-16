@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/index.css">
-    <link rel="stylesheet" href="../css/gerenciar-servico.css">
+    <link rel="stylesheet" href="../css/listagem-clientes.css">
     <script src="/js/gerente.js"></script>
 
-    <title>Gerenciar Serviço</title>
+    <title>Lista de clientes</title>
 </head>
 
 
@@ -18,10 +18,10 @@
             <div class="div-logo">
                 <ul class="home-logo">
                     <li>
-                        <a href="/gerente.html"><img src="../img/logo-MCAM.png" class="logo"></a>
+                        <a href="/funcionario.html"><img src="../img/logo-MCAM.png" class="logo"></a>
                     </li>
                     <li>
-                        <a href="/gerente.html" class="link-limpo">Home</a>
+                        <a href="/funcionario.html" class="link-limpo">Home</a>
                     </li>
                 </ul>
 
@@ -31,24 +31,15 @@
                 <li>
                     <select class="servG">
                         <option class="opcao-select" value="" selected disabled>Serviços</option>
-                        <option class="opcao-select" value="/criar-servico-gerente.html">Criar</option>
-                        <option class="opcao-select" value="/gerenciar-servicos-gerente.html">Gerenciar</option>
+                        <option class="opcao-select" value="/criar-servico-funcionario.html">Criar</option>
+                        <option class="opcao-select" value="/gerenciar-servicos-funcionario.html">Gerenciar</option>
                     </select>
                 </li>
 
                 <li>
-                    <a href="/listar-clientes-gerente.html" class="link-limpo">Clientes</a>
+                    <a href="/listar-clientes-funcionario.html" class="link-limpo">Clientes</a>
                 </li>
-                <li>
-                    <select class="servG">
-                        <option class="opcao-select" value="" selected disabled>Funcionários</option>
-                        <option class="opcao-select" value="/cadastro-funcionario.html">Cadastrar</option>
-                        <option class="opcao-select" value="/gerenciar-funcionario.html">Gerenciar</option>
-                    </select>
-                </li>
-                <li>
-                    <a href="/relatorio-gerente.html" class="link-limpo">Relatório</a>
-                </li>
+
                 <li>
                     <a href="\logout" class="link-limpo">Sair</a>
                 </li>
@@ -68,23 +59,26 @@
     </header>
 
     <div class="container">
-        <h2 class="titulo">Gerenciar Serviço</h2>
+        <h2>Lista de Clientes</h2>
 
-        <div class="secao-superior">
-            <div id="dados-servico" class="secao"></div>
-            <div class="separador-vertical"></div>
-            <div id="dados-cliente" class="secao"></div>
-        </div>
+        <input type="text" id="filtro-nome" placeholder="Filtrar por nome..." />
 
-        <div class="secao-inferior">
-            <div id="dados-orcamento" class="secao"></div>
-            <div id="itens-orcamento" class="secao"></div>
-            <div id="acoes-status" class="secao"></div>
-        </div>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>CPF</th>
+                    <th>Telefone</th>
+                    <th>Email</th>
+                    <th>Endereço</th>
+                </tr>
+            </thead>
+            <tbody id="tabela-clientes">
+                <!-- Clientes serão adicionados aqui -->
+            </tbody>
+        </table>
+
     </div>
-
-
-
 
     <footer>
         <div class="logo-footer">
@@ -99,17 +93,12 @@
                     <select class="sef servG">
                         <option class="opcao-select-footer" value="" selected disabled>Serviços</option>
 
-                        <option class="opcao-select-footer" value="/criar-servico-gerente.html">Criar</option>
-                        <option class="opcao-select-footer" value="/gerenciar-servicos-gerente.html">Gerenciar</option>
+                        <option class="opcao-select-footer" value="/criar-servico-funcionario.html">Criar</option>
+                        <option class="opcao-select-footer" value="/gerenciar-servicos-funcionario.html">Gerenciar
+                        </option>
                     </select>
                 </li>
-                <li>
-                    <select class="sef servG">
-                        <option class="opcao-select" value="" selected disabled>Funcionários</option>
-                        <option class="opcao-select" value="/cadastro-funcionario.html">Criar</option>
-                        <option class="opcao-select" value="/gerenciar-funcionario.html">Gerenciar</option>
-                    </select>
-                </li>
+
             </ul>
         </div>
 
@@ -136,9 +125,7 @@
         </div>
     </footer>
 
-    <script src="/js/gerenciar-servico.js"></script>
-
-
+    <script src="/js/listar-clientes-contato.js"></script>
 </body>
 
 </html>
