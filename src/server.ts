@@ -9,9 +9,11 @@ import servico from './routes/servico.routes';
 import orcamento from './routes/orcamento.routes';
 import itens from './routes/itens_orcamento.routes';
 import session from 'express-session';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const app = express();
-const PORT = 3003;
+const PORT = process.env.PORT || 3000;
 
 
 
@@ -20,7 +22,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(session({
-  secret: 'chave_secreta_temporaria',
+  secret: process.env.SESSION_SECRET || 'fallback_inseguro',
   resave: false,
   saveUninitialized: true,
   cookie: { secure: false } // coloque como true apenas se usar HTTPS

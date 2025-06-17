@@ -1,5 +1,7 @@
 import { Servico } from "../dominio/servico";
 import { ServicoDAO } from "../DAO/ServicoDAO";
+import { enviarEmail } from '../../servicos/emailService';
+import { Status } from '../../types/Status'
 
 export class ServicoBO {
     private servicoDAO: ServicoDAO;
@@ -55,33 +57,74 @@ export class ServicoBO {
         return await this.servicoDAO.buscarServicoPorId(id);
     }
 
-    async atualizarStatus(id: number) {
+    async atualizarStatus(id: number): Promise<Servico | null> {
         const servico = await this.buscarServicoPorId(id);
-        if (servico) {
-            if (servico.status === 'Em análise') {
-                servico.status = 'Aguardando confirmação';
-            } else if (servico.status === 'Aguardando confirmação') {
-                servico.status = 'Consertando';
-            } else if (servico.status === 'Aguardando pagamento') {
-                servico.status = 'Finalizado';
-            } else if (servico.status === 'Consertando') {
-                servico.status = 'Aguardando pagamento';
-            }
+        if (!servico) return null;
 
+        let novoStatus: Status;
+
+        if (servico.status === 'Em análise') {
+            novoStatus = 'Aguardando confirmação';
+        } else if (servico.status === 'Aguardando confirmação') {
+            novoStatus = 'Consertando';
+        } else if (servico.status === 'Aguardando pagamento') {
+            novoStatus = 'Finalizado';
+        } else if (servico.status === 'Consertando') {
+            novoStatus = 'Aguardando pagamento';
+        } else {
+            // Se não encaixa em nenhum status esperado, não atualiza
+            return null;
         }
 
-        return await this.servicoDAO.atualizarStatus(servico);
+        servico.status = novoStatus;
+
+        try {
+            // Atualiza no banco via DAO e recebe o objeto atualizado
+            const servicoAtualizado = await this.servicoDAO.atualizarStatus(servico);
+            if (!servicoAtualizado?.cliente) {
+                return null;
+            }
+            // Envia email para o cliente
+            const emailCliente = servicoAtualizado.cliente.email;
+            const assunto = 'Atualização do status do seu serviço';
+            let mensagemExtra = '';
+
+            if (novoStatus === 'Aguardando pagamento') {
+                mensagemExtra = '<p><strong>Realize o pagamento</strong> para finalizarmos o serviço.</p>';
+            } else if (novoStatus === 'Aguardando confirmação') {
+                mensagemExtra = '<p><strong>Confirme o serviço</strong> para prosseguirmos com o conserto.</p>';
+            }
+
+            const mensagemHtml = `
+                        <p>Olá, ${servicoAtualizado.cliente.nome}</p>
+                        <p>O status do seu serviço na <strong>MasterCar Automecânica</strong> foi atualizado:</p>
+                        <p><strong>Descrição do Serviço:</strong>${servicoAtualizado.descricao}</p>
+                        <p>Novo status: <strong>${novoStatus}</strong></p>
+                        ${mensagemExtra}
+                        <p>Obrigado por confiar em nossos serviços!</p>
+                `;
+
+            await enviarEmail(emailCliente, assunto, mensagemHtml);
+            console.log('Email enviado para o cliente com sucesso.');
+
+            //console.log(emailCliente, assunto, mensagemHtml);
+
+            return servicoAtualizado;
+        } catch (erro) {
+            console.error('Erro ao atualizar status ou enviar email:', erro);
+            return null;
+        }
     }
 
     async cancelarServico(id: number) {
         const servico = await this.buscarServicoPorId(id);
         if (servico) {
-            if(servico.status=="Aguardando confirmação"){
-                servico.status="Cancelado";
-            }else{
+            if (servico.status == "Aguardando confirmação") {
+                servico.status = "Cancelado";
+            } else {
                 return null;
             }
-        }else{
+        } else {
             return null;
         }
 
