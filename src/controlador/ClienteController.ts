@@ -63,7 +63,7 @@ export class ClienteController {
         endereco
       );
 
-      novoCliente.endereco = endereco || null;
+      
 
       const resultadoUsuario = await this.usuarioBO.cadastrar(novoUsuario);
       const resultadoCliente = await this.clienteBO.cadastrar(novoCliente);

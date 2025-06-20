@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { UsuarioBO } from '../modelo/BO/UsuarioBO';
+import  bcrypt  from 'bcrypt';
 
 export class UsuarioController {
   private usuarioBO = new UsuarioBO();
@@ -13,7 +14,7 @@ export class UsuarioController {
 
     const usuario = await this.usuarioBO.buscarPorLoginSenha(login,senha);
     
-    if (!usuario || usuario.senha !== senha) {
+    if (!usuario) {
       return res.status(401).send('Usuário ou senha inválidos');
     }
 

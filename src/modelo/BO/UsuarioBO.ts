@@ -1,5 +1,6 @@
 import { Usuario } from "../dominio/usuario";
 import { UsuarioDAO } from "../DAO/UsuarioDAO";
+import bcrypt from 'bcrypt';
 
 export class UsuarioBO {
   private usuarioDAO: UsuarioDAO;
@@ -13,7 +14,21 @@ export class UsuarioBO {
   }
 
   public async buscarPorLoginSenha(login: string, senha: string): Promise<Usuario | null> {
-    return this.usuarioDAO.buscarPorLoginSenha(login, senha);
+    const usuario = await this.usuarioDAO.buscarPorLoginSenha(login); // buscar apenas pelo login
+    console.log(usuario);
+    if (!usuario) {
+      return null;
+    }
+
+    const senhaCorreta = await bcrypt.compare(senha, usuario.senha); // compara a senha digitada com o hash salvo
+    console.log(senhaCorreta);
+    console.log(usuario.senha);
+    console.log(senha);
+    if (!senhaCorreta) {
+      return null;
+    }
+
+    return usuario;
   }
 
   public async atualizar(usuario: Usuario): Promise<boolean> {
@@ -30,11 +45,11 @@ export class UsuarioBO {
 
   public async trocarSenha(usuario: Usuario): Promise<boolean> {
     try {
-      //   // Hash da nova senha
-      //   const senhaCriptografada = await bcrypt.hash(usuario.senha, 10);
+      // Hash da nova senha
+      const senhaCriptografada = await bcrypt.hash(usuario.senha, 10);
 
-      //   // Atualiza o objeto com a senha criptografada
-      //   usuario.senha = senhaCriptografada;
+      // Atualiza o objeto com a senha criptografada
+      usuario.senha = senhaCriptografada;
 
       // Chama o DAO para atualizar a senha
       const atualizado = await this.usuarioDAO.trocarSenha(usuario);
@@ -49,6 +64,9 @@ export class UsuarioBO {
 
   // Valida o cadastro do usuário
   public async cadastrar(usuario: Usuario): Promise<boolean> {
+
+    const hash = await bcrypt.hash(usuario.senha, 10);
+    usuario.senha = hash;
 
     const resultado = await this.usuarioDAO.cadastrar(usuario);
     return resultado;

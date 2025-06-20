@@ -69,8 +69,8 @@ export class UsuarioDAO {
     return true;
   }
 
-  public async buscarPorLoginSenha(login: string, senha: string): Promise<Usuario | null> {
-    const result = await db.query('SELECT * FROM usuario WHERE login = $1 AND senha = $2', [login, senha]);
+  public async buscarPorLoginSenha(login: string): Promise<Usuario | null> {
+    const result = await db.query('SELECT * FROM usuario WHERE login = $1', [login]);
 
     if (result.rows.length === 0) return null;
 
