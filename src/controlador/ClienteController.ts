@@ -69,6 +69,7 @@ export class ClienteController {
       const resultadoCliente = await this.clienteBO.cadastrar(novoCliente);
 
       if (resultadoUsuario && resultadoCliente) {
+        
         res.status(201).json({ mensagem: 'Cadastro realizado com sucesso!' });
       } else {
         res.status(500).send('Erro ao cadastrar cliente.');

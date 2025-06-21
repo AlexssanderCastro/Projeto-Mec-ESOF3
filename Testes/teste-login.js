@@ -1,53 +1,64 @@
 const { Builder, By, until } = require('selenium-webdriver');
 
-async function testarFluxoLogin(login, senha) {
+async function testarFluxoLogin(login, senha,resultado) {
   let driver = await new Builder().forBrowser('chrome').build();
 
   try {
-    // 1. Abrir a página inicial
+    
     await driver.get('http://localhost:3003');
-
-    // 2. Esperar e clicar no link "Entre"
+    await driver.manage().window().maximize();
+    
     const linkLogin = await driver.wait(
       until.elementLocated(By.linkText('Entre')),
       5000
     );
     await linkLogin.click();
 
-    // 3. Esperar a página de login carregar
+   
     await driver.wait(until.titleIs('Login'), 5000);
 
-    // 4. Preencher login e senha
+    
     await driver.findElement(By.id('login')).sendKeys(login);
     await driver.findElement(By.id('senha')).sendKeys(senha);
 
-    // 5. Clicar no botão "Entrar"
+   
     await driver.findElement(By.css('button[type="submit"]')).click();
 
-    // 6. Verificar sucesso (ex: redirecionamento para gerente.html)
+    
     const currentUrl = await driver.getCurrentUrl();
 
     if (
-      currentUrl.includes('/gerente.html') ||
-      currentUrl.includes('/cliente.html') ||
-      currentUrl.includes('/funcionario.html')
+      currentUrl.includes(resultado) 
+     
     ) {
-      console.log('✅ Login bem-sucedido!');
+      let saida='';
+      if(resultado=='/login.html'){
+        saida='❌Login falhou';
+      }else if(resultado=='/cliente.html'){
+        saida='✅Login funcionou e redirecionou para página do cliente';
+      }else if(resultado=='/gerente.html'){
+        saida='✅Login funcionou e redirecionou para página do gerente';
+      }else{
+        saida='✅Login funcionou e redirecionou para página do funcionario';
+      }
+      console.log('✅ Teste bem-sucedido!',saida);
     } else {
-      console.log('❌ Login falhou.');
+      console.log('❌ Teste falhou.');
     }
 
     
   } catch (error) {
-    console.error('❌ \x1b[31mLogin falhou!\x1b[0m');
+    console.error('❌ \x1b[31mTeste falhou com erro!\x1b[0m');
   } finally {
     await driver.quit();
   }
 }
 
 (async () => {
-  await testarFluxoLogin('cliente123', 'cliente123');
-  await testarFluxoLogin('alex123', 'alex');
+  await testarFluxoLogin('cliente123', 'cliente123','/cliente.html');
+  await testarFluxoLogin('alex123', 'alex','/gerente.html');
+  await testarFluxoLogin('teste123', 'teste123','/funcionario.html');
+  await testarFluxoLogin('abcd123', 'abcd123','/login.html');
 })();
 
 

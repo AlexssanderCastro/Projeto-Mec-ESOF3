@@ -9,13 +9,13 @@ export class UsuarioController {
     const { login, senha } = req.body;
 
     if (!login || !senha) {
-      return res.status(400).send('Login e senha são obrigatórios');
+      return res.redirect('/login.html?erro=Usuário ou senha inválidos');
     }
 
     const usuario = await this.usuarioBO.buscarPorLoginSenha(login,senha);
     
     if (!usuario) {
-      return res.status(401).send('Usuário ou senha inválidos');
+      return res.redirect('/login.html?erro=Usuário ou senha inválidos');
     }
 
     // Salvando na sessão

@@ -21,6 +21,10 @@ form.addEventListener('submit', async (e) => {
     } else {
       mostrarAlerta('Cadastro realizado com sucesso!', 'verde');
       form.reset();
+      
+      setTimeout(() => {
+        window.location.href = '/login.html';
+      }, 1000); 
     }
   } catch (erro) {
     mostrarAlerta('Erro ao conectar com o servidor.');
@@ -33,3 +37,4 @@ function mostrarAlerta(mensagem, cor = 'vermelho') {
   alerta.style.backgroundColor = cor === 'vermelho' ? '#f44336' : '#4CAF50'; // vermelho ou verde
   setTimeout(() => alerta.style.display = 'none', 4000); // some após 4 segundos
 }
+
