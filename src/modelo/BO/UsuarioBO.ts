@@ -15,15 +15,13 @@ export class UsuarioBO {
 
   public async buscarPorLoginSenha(login: string, senha: string): Promise<Usuario | null> {
     const usuario = await this.usuarioDAO.buscarPorLoginSenha(login); // buscar apenas pelo login
-    console.log(usuario);
+    
     if (!usuario) {
       return null;
     }
 
     const senhaCorreta = await bcrypt.compare(senha, usuario.senha); // compara a senha digitada com o hash salvo
-    console.log(senhaCorreta);
-    console.log(usuario.senha);
-    console.log(senha);
+    
     if (!senhaCorreta) {
       return null;
     }
@@ -32,7 +30,7 @@ export class UsuarioBO {
   }
 
   public async atualizar(usuario: Usuario): Promise<boolean> {
-
+    usuario.senha = await bcrypt.hash(usuario.senha, 10);
     const resultado = await this.usuarioDAO.atualizar(usuario);
     return resultado;
   }

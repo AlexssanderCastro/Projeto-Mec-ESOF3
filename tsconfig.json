@@ -1,17 +1,18 @@
 {
   "compilerOptions": {
-    
-    "target": "ES6",
+    "target": "ES2020",                   
     "module": "commonjs",
     "rootDir": "./src",
     "outDir": "./dist",
-    "esModuleInterop": true,
     "strict": true,
-    "skipLibCheck": true,
+    "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "typeRoots": ["./node_modules/@types", "./src/types"]
-    
+    "skipLibCheck": true,
+    "typeRoots": ["./node_modules/@types", "./src/types"],
+    "resolveJsonModule": true,            // Permite importar arquivos .json (útil em alguns casos)
+    "moduleResolution": "node",           // Garante que a resolução de módulos siga o padrão Node.js
+    "declaration": true                   // Gera arquivos .d.ts (útil se quiser usar em outro projeto ou criar uma lib)
   },
   "include": ["src/**/*.ts"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "dist"]
 }

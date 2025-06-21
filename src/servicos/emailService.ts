@@ -4,9 +4,11 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY;
+const EMAIL_SENDER = process.env.EMAIL_SENDER;
+const EMAIL_REPLY_TO = process.env.EMAIL_REPLY_TO;
 
-if (!SENDGRID_API_KEY) {
-  throw new Error("Chave SENDGRID_API_KEY não está definida no arquivo .env");
+if (!SENDGRID_API_KEY || !EMAIL_SENDER || !EMAIL_REPLY_TO) {
+  throw new Error("Alguma variável de ambiente (SENDGRID_API_KEY, EMAIL_SENDER, EMAIL_REPLY_TO) não está definida no arquivo .env");
 }
 
 sgMail.setApiKey(SENDGRID_API_KEY);
@@ -14,10 +16,10 @@ sgMail.setApiKey(SENDGRID_API_KEY);
 export async function enviarEmail(to: string, subject: string, html: string) {
   const msg = {
     to,
-    from: 'ac9954460@gmail.com',  // seu sender verificado
+    from: EMAIL_SENDER!,
     subject,
     html,
-    replyTo: 'ac9954460@gmail.com'
+    replyTo: EMAIL_REPLY_TO!
   };
 
   try {

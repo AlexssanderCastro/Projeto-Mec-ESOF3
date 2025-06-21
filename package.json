@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node-dev --respawn --transpile-only src/server.ts"
+    "start": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "build": "tsc && xcopy src\\views dist\\views /E /I /Y && xcopy src\\public dist\\public /E /I /Y",
+    "start:prod": "node dist/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
@@ -16,7 +18,8 @@
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "express-session": "^1.18.1",
-    "pg": "^8.15.6"
+    "pg": "^8.15.6",
+    "selenium-webdriver": "^4.33.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
