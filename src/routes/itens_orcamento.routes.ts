@@ -15,4 +15,12 @@ router.post("/adicionar-item-orcamento", async (req, res, next) => {
   }
 });
 
+router.delete("/deletar-item/:id", async (req, res, next) => {
+  try {
+    await itensController.deletarItem(req, res);
+  } catch (err) {
+    next(err);
+  }
+});
+
 export default router;

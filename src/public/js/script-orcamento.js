@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", async () => {
-    const params = new URLSearchParams(window.location.search);
-    const servicoId = params.get("id");
+    
+    const servicoId = sessionStorage.getItem('servicoId');
     document.body.dataset.servicoId = servicoId;
 
 
@@ -106,14 +106,37 @@ function adicionarItemNaTabela(item) {
     const valorUnitario = Number(item._valor_unitario);
 
     const linha = document.createElement("tr");
-
+    linha.dataset.itemId = item._id;
     linha.innerHTML = `
         <td>${item._descricao_peca}</td>
         <td>${quantidade}</td>
         <td>${valorUnitario.toFixed(2)}</td>
         <td>${subtotal.toFixed(2)}</td>
+        <td><button class="remover-item" data-id="${item._id}">Remover</button></td>
     `;
     corpoTabela.appendChild(linha);
+
+     linha.querySelector(".remover-item").addEventListener("click", async () => {
+        const confirmar = confirm("Deseja remover este item?");
+        if (!confirmar) return;
+
+        try {
+            const resposta = await fetch(`/deletar-item/${item._id}`, {
+                method: "DELETE"
+            });
+
+            if (resposta.ok) {
+                linha.remove();
+                atualizarValorTotalHTML();
+            } else {
+                const erro = await resposta.json();
+                alert("Erro ao remover item: " + erro.erro);
+            }
+        } catch (err) {
+            console.error("Erro ao remover item:", err);
+            alert("Erro ao remover item.");
+        }
+    });
 }
 
 function atualizarValorTotal(itens) {

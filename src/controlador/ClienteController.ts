@@ -63,13 +63,13 @@ export class ClienteController {
         endereco
       );
 
-      
+
 
       const resultadoUsuario = await this.usuarioBO.cadastrar(novoUsuario);
       const resultadoCliente = await this.clienteBO.cadastrar(novoCliente);
 
       if (resultadoUsuario && resultadoCliente) {
-        
+
         res.status(201).json({ mensagem: 'Cadastro realizado com sucesso!' });
       } else {
         res.status(500).send('Erro ao cadastrar cliente.');
@@ -318,9 +318,18 @@ export class ClienteController {
       res.status(500).json({ mensagem: "Erro ao buscar clientes." });
     }
 
+
   }
 
-  
+  public async buscarPorEmail(req: Request, res: Response): Promise<void> {
+    const {
+      email
+    } = req.body;
+    const emailExistente = await this.clienteBO.buscarPorEmail(email);
+    if(emailExistente){
+      
+    }
+  }
 
 
 

@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const servicoId = sessionStorage.getItem('servicoId');
 
+
     if (!servicoId) {
         alert("ID do serviço não informado.");
         return;
@@ -112,7 +113,7 @@ function renderizarAcoes(servico) {
 
 
     if (servico._status === "Em análise") {
-        div.innerHTML += `<button onclick="abrirTelaCriarOrcamento('${servico._id}')">Gerenciar Orçamento</button>`;
+        div.innerHTML += `<button onclick="abrirTelaCriarOrcamento()">Gerenciar Orçamento</button>`;
     } else if (servico._status === "Aguardando confirmação") {
         div.innerHTML += `<button class="danger-btn" onclick="cancelarServico(${servico._id})">Cancelar</button>`;
     } else if (servico._status === "Consertando") {
@@ -122,8 +123,8 @@ function renderizarAcoes(servico) {
     }
 }
 
-function abrirTelaCriarOrcamento(id) {
-    window.location.href = `/criar-orcamento-funcionario.html?id=${id}`;
+function abrirTelaCriarOrcamento() {
+    window.location.href = `/criar-orcamento-funcionario.html`;
 }
 
 async function atualizarStatus(servicoId) {

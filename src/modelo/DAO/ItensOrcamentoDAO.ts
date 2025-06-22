@@ -35,4 +35,49 @@ export class ItensOrcamentoDAO {
         }
     }
 
+    async buscarItem(id: number): Promise<ItemOrcamento> {
+
+        const query = `
+            SELECT * FROM itens_orcamento WHERE id=$1
+        `;
+
+        const values = [
+            id
+        ];
+
+        try {
+            const result = await db.query(query, values);
+
+            const row = result.rows[0];
+            return new ItemOrcamento(
+                row.id,
+                row.descricao_peca,
+                row.valor_unitario,
+                row.quantidade,
+                row.id_orcamento
+            );
+        } catch (erro) {
+            console.error("Erro ao inserir item no banco:", erro);
+            throw new Error("Falha ao inserir item no banco de dados.");
+        }
+
+    }
+
+    async deletarItem(id: number): Promise<boolean> {
+        const query = `
+        DELETE FROM itens_orcamento WHERE id = $1
+    `;
+
+        try {
+            const result = await db.query(query, [id]);
+
+            // Se nenhuma linha foi deletada, o item não existia
+            return (result.rowCount ?? 0) > 0;
+
+        } catch (erro) {
+            console.error("Erro ao deletar item no banco:", erro);
+            throw new Error("Falha ao deletar item do banco de dados.");
+        }
+    }
+
 }

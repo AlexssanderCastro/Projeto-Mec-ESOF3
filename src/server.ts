@@ -8,6 +8,7 @@ import funcionario from './routes/funcionario.routes';
 import servico from './routes/servico.routes';
 import orcamento from './routes/orcamento.routes';
 import itens from './routes/itens_orcamento.routes';
+import teste from './routes/teste.routes';
 import session from 'express-session';
 import dotenv from 'dotenv';
 dotenv.config();
@@ -40,6 +41,7 @@ app.use(funcionario);
 app.use(servico);
 app.use(orcamento);
 app.use(itens);
+app.use(teste);
 
 // Iniciando o servidor
 app.listen(PORT, () => {

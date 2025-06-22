@@ -18,4 +18,17 @@ export class ItensOrcamentoBO {
         return await this.itensDAO.inserir(item);
     }
 
+    async buscarItem(id:number): Promise<ItemOrcamento>{
+        
+
+        return this.itensDAO.buscarItem(id);
+
+    }
+
+    async deletarItem(id:number): Promise<boolean>{
+        
+
+        return this.itensDAO.deletarItem(id);
+
+    }
 }
