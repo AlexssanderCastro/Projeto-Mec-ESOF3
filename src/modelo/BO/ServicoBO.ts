@@ -128,7 +128,30 @@ export class ServicoBO {
             return null;
         }
 
-        return await this.servicoDAO.atualizarStatus(servico);
+        const servicoAtualizado = await this.servicoDAO.atualizarStatus(servico);
+        if (!servicoAtualizado?.cliente) {
+            return null;
+        }
+        // Envia email para o cliente
+        const emailCliente = servicoAtualizado.cliente.email;
+        const assunto = 'Cancelamento do seu serviço';
+        let mensagemExtra = 'Venha buscar seu veículo se ainda não tiver buscado';
+
+        
+        
+
+        const mensagemHtml = `
+                        <p>Olá, ${servicoAtualizado.cliente.nome}</p>
+                        <p>O seu serviço na <strong>MasterCar Automecânica</strong> foi cancelado:</p>
+                        <p><strong>Descrição do Serviço:</strong>${servicoAtualizado.descricao}</p>
+                        ${mensagemExtra}
+                        <p>Obrigado por confiar em nossos serviços!</p>
+                `;
+
+        await enviarEmail(emailCliente, assunto, mensagemHtml);
+        console.log('Email de cancelamento enviado para o cliente com sucesso.');
+
+        return servicoAtualizado;
     }
 
     public async gerarRelatorio() {

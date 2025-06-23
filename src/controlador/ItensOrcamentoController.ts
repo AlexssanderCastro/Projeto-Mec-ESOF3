@@ -39,6 +39,7 @@ export class ItensOrcamentoController {
 
             // Buscar o item no banco para saber o valor e a quantidade
             const item = await this.itensBO.buscarItem(itemId);
+            console.log(item);
 
             if (!item) {
                 return res.status(404).json({ erro: "Item não encontrado." });

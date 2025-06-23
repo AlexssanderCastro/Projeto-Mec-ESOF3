@@ -97,20 +97,6 @@ function gerarCpfAleatorio() {
     resultado:'/login.html'
   });
 
-  cpf = gerarCpfAleatorio();
-
-  await testarCadastroCliente({
-     nome: 'Maria Selenium',
-    dataNascimento: '1990-10-10',
-    telefone: '(34) 99999-1234',
-    endereco: 'Av. Teste, 999',
-    cpf: cpf,
-    email: `maria${Date.now()}@mail.com`,
-    login: `maria${Date.now()}`,
-    senha: 'senha123',
-    resultado:'/login.html'
-  });
-
   await testarCadastroCliente({
      nome: 'Maria Selenium',
     dataNascimento: '1990-10-10',

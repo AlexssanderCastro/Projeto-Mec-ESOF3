@@ -56,8 +56,8 @@ async function testarFluxoLogin(login, senha,resultado) {
 
 (async () => {
   await testarFluxoLogin('cliente123', 'cliente123','/cliente.html');
-  await testarFluxoLogin('alex123', 'alex','/gerente.html');
-  await testarFluxoLogin('teste123', 'teste123','/funcionario.html');
+  await testarFluxoLogin('alex123', 'alex123','/gerente.html');
+  await testarFluxoLogin('lucas123', 'lucas123','/funcionario.html');
   await testarFluxoLogin('abcd123', 'abcd123','/login.html');
 })();
 

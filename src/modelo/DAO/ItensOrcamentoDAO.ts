@@ -54,7 +54,7 @@ export class ItensOrcamentoDAO {
                 row.descricao_peca,
                 row.valor_unitario,
                 row.quantidade,
-                row.id_orcamento
+                row.orcamento_id
             );
         } catch (erro) {
             console.error("Erro ao inserir item no banco:", erro);
